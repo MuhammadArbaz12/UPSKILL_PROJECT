@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.10.2",
+    "firebase": "^11.2.0",
     "mongodb": "^6.12.0",
     "mongoose": "^8.9.5",
     "next": "15.1.6",
