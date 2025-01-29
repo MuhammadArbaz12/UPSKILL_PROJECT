@@ -14,7 +14,7 @@ const handleUploadImage = () =>{
 }
   return (
     <div className='flex w-[full] gap-5 m-auto justify-between mt-2 bg-slate-300 rounded-md items-center '> 
-        <img className='w-[10%] h-full p-2 rounded-full' src={user.imageUrl} alt='user_img' />
+        <img className='w-[10%] h-full p-2  hover:bg-slate-400 rounded-full transition-all duration-200' src={user.imageUrl} alt='user_img' />
       <textarea className='flex w-full ' noOfLines={2}/>
       
       <div className="flex w-[40%] gap-5 h-full  ">
@@ -23,7 +23,7 @@ const handleUploadImage = () =>{
       }}  /> 
       <input hidden  type='file' accept='images/*' ref={IMAGEFILEREF} onChange={handleUploadImage} />
 
-      <button className='font-serif text-green-950 font-bold bg-white w-[50%] rounded-md'>Post</button>
+      <button className='font-serif text-green-950 font-bold bg-white w-[50%]  hover:bg-slate-400 rounded-full transition-all duration-200 '>Post</button>
       </div>
     </div>
   )
