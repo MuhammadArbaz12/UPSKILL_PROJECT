@@ -95,6 +95,9 @@ export default function Input() {
             ref={IMAGEFILEREF}
             onChange={handleUploadImage}
           />
+          <button onClick={()=>{
+            setSelectedImage(null)
+          }} className="px-2 py-1 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">Cancel</button>
         </div>
         <button className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">
           Post
