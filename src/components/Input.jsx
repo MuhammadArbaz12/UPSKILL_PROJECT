@@ -2,6 +2,7 @@
 import React, { useRef, useState } from 'react';
 import { FaImage } from "react-icons/fa";
 import { useUser } from '@clerk/nextjs';
+import { CldUploadWidget } from 'next-cloudinary';
 
 export default function Input() {
   const { user, isSignedIn, isLoaded } = useUser();
@@ -34,7 +35,7 @@ export default function Input() {
       )}
 
       <div className="flex items-center justify-between">
-        <div>
+        {/* <div>
           <FaImage
             size={24}
             color="red"
@@ -56,7 +57,16 @@ export default function Input() {
             )
           }
           
-        </div>
+        </div> */}
+        <CldUploadWidget uploadPreset="<Your Upload Preset>">
+  {({ open }) => {
+    return (
+      <button onClick={() => open()}>
+        Upload an Image
+      </button>
+    );
+  }}
+</CldUploadWidget>
         <button className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">
           Post
         </button>
