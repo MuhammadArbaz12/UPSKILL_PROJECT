@@ -58,7 +58,7 @@ export default function Input() {
           }
           
         </div> */}
-        <CldUploadWidget uploadPreset="<Your Upload Preset>">
+        <CldUploadWidget uploadPreset="UPSKILL_PROJECT">
   {({ open }) => {
     return (
       <button onClick={() => open()}>
