@@ -61,7 +61,7 @@ export default function Input() {
         <CldUploadWidget uploadPreset="UPSKILL_PROJECT">
   {({ open }) => {
     return (
-      <button onClick={() => open()}>
+      <button className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600" onClick={() => open()}>
         Upload an Image
       </button>
     );
@@ -74,7 +74,6 @@ export default function Input() {
     </div>
   );
 }
-
 
 
 
