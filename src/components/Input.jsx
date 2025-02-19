@@ -1,31 +1,53 @@
 "use client"
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { FaImage } from "react-icons/fa";
 import { useUser } from '@clerk/nextjs';
 import { CldUploadWidget } from 'next-cloudinary';
 
 export default function Input() {
   const { user, isSignedIn, isLoaded } = useUser();
-  const IMAGEFILEREF = useRef(null);
+  // const IMAGEFILEREF = useRef(null);
   const [selectedImage, setSelectedImage] = useState(null);
-
+  const [input, setInput] = useState("");
+  const [postLoading, setPostLoading] = useState(false);
   if (!user || !isSignedIn || !isLoaded) {
     return null;
   }
 
-  const handleUploadImage = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setSelectedImage(URL.createObjectURL(file));
+  const handleUpload = (result) => {
+    if (result.event === "success") {
+      setSelectedImage(result.info.secure_url);
     }
   };
+  const handleSubmit = () =>{
+    setPostLoading(true);
+    const response = fetch(`/api/post/create`,{
+      method:"POST",
+      headers:{
+        'content-type':'application/json'
+      },
+      body: JSON.stringify({
+        userMongoId: user.publicMetadata.userMongoId,
+        name: user.fullName,
+        username: user.username,
+        text: input, 
+        porfileimg: user.imageUrl,
+        image: selectedImage, 
+      }),
+    });
+    setPostLoading(false);
+    setInput("");
+    setSelectedImage(null);
+  }
 
   return (
     <div className="flex flex-col m-auto p-4 border rounded-lg shadow-lg bg-white w-full max-w-md space-y-4">
       <textarea
-        rows={2}
-        className="w-full p-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
-        placeholder="Write your post..."
+         rows={2}
+         value={input}
+         onChange={(e) => setInput(e.target.value)}
+         className="w-full p-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+         placeholder="Write your post..."
       />
 
       {selectedImage && (
@@ -58,17 +80,24 @@ export default function Input() {
           }
           
         </div> */}
-        <CldUploadWidget uploadPreset="UPSKILL_PROJECT">
-  {({ open }) => {
-    return (
-      <button className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600" onClick={() => open()}>
-        Upload an Image
-      </button>
-    );
-  }}
-</CldUploadWidget>
-        <button className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600">
-          Post
+        <CldUploadWidget uploadPreset="UPSKILL_PROJECT" onUpload={handleUpload}>
+          {({ open }) => (
+            <button
+              type="button"
+              className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+              onClick={() => open()}
+            >
+              Upload an Image
+            </button>
+          )}
+        </CldUploadWidget>
+
+        <button
+          onClick={handleSubmit}
+          disabled={input.trim() === "" || postLoading}
+          className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+        >
+          {postLoading ? "Posting..." : "Post"}
         </button>
       </div>
     </div>
@@ -77,63 +106,3 @@ export default function Input() {
 
 
 
-
-// "use client"
-// import React, { useRef, useState } from 'react';
-// import { useUser } from '@clerk/nextjs';
-// import { MdFreeCancellation } from "react-icons/md";
-
-// export default function Input() {
-//   const { user, isSignedIn, isLoaded } = useUser();
-//   const IMAGEFILEREF = useRef(null);
-//   const [selectedImage, setSelectedImage] = useState(null);
-//   const [Nicbackimg, setNicbackimg] = useState(null);
-//   const [NICimg, setNICimg] = useState(null);
-
-//   if (!user || !isSignedIn || !isLoaded) {
-//     return null;
-//   }
-
-//   const handleUploadImage = (e) => {
-//     const file = e.target.files[0];
-//     if (file) {
-//       setSelectedImage(URL.createObjectURL(file));
-//     }
-//   };
-
-//   return (
-//     <div className="flex flex-col p-4 border rounded-lg shadow-lg bg-white w-full max-w-md space-y-4 m-auto">
-     
-
-//       <h1>NIC Front</h1>
-//       <div className="flex justify-end">
-//       <MdFreeCancellation size={25} onClick={()=>{
-//             setSelectedImage(null)
-//           }}/>
-
-    
-//       </div>
-
-//       {selectedImage && (
-//         <div className="relative">
-//           <img src={selectedImage} alt="Uploaded" className="w-full rounded-lg shadow-md" />
-//         </div>
-//       )}
-
-//         <div className="flex items-center justify-between">
-//           <div>
-            
-            
-//             <input
-              
-//               type="file"
-//               accept="image/*"
-//               ref={IMAGEFILEREF}
-//               onChange={handleUploadImage}
-//             />
-//           </div>
-          
-//         </div>
-//       </div>
-//     );
-//   }
