@@ -1,33 +1,35 @@
 import POST from "../../../../lib/models/post.model";
-import {Connect} from "../../../../lib/mongodb/mongoose"
-import {currentUser} from "@clerk/nextjs/server"
+import { connect } from "../../../../lib/mongodb/mongoose"
+import { currentUser } from "@clerk/nextjs/server"
 
-
-
-export async function Post (req){
+export async function Post(req) {
     const user = await currentUser(req)
     try {
-        await Connect ()
-        const data = await req.json ()
-        if (!user || user.publicMetadata.userMongoId !== data.userMongoId){
-            return new Response ("unotherized",{
+        await connect()
+        const data = await req.json()
+        if (!user || user.publicMetadata.userMongoId !== data.userMongoId) {
+            return new Response ("unauthorized", {
                 status:401
             })
-          }
-          const newpost = POST.create({
-            User:data.userMongoId,
+        }
+        const newPost = await POST.create({
+            user:data.userMongoId,
             name:data.name,
             username:data.username,
             text:data.text,
-            profileimg:data.profileimg,
+            profileImg:data.profileImg,
             image:data.image
-        });
-        await newpost.save()
-        return new Response (json.stringify(),
-        {status:201}
+        })
+
+        await newPost.save()
+        return new Response (json.stringify(newPost),
+        {status:200}
     )
+      
+
     } catch (error) {
-        console.log (error)
-        return new Response ("internal server error")
+            console.log(error)
+            return new Response ("Internal Server error"), 
+            {status:500}
     }
 }

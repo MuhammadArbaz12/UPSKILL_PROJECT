@@ -1,55 +1,47 @@
+import mongoose from "mongoose"
 
-import mongoose from "mongoose";
-
-
-const PostSchema = new mongoose.Schema({
-    text:{
+const POSTSchema = new mongoose.Schema({
+    text: {
         type: String,
-        required: true,
+        required: true
     },
-    image:{
+    image: {
         type: String,
     },
-    User:{
-        type:mongoose.Schema.type.objectid,
-        ref: "User",
-        required: true,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     },
-    username:{
-        type:String,
-        required:true
+    name: {
+        type: String,
+        required: true
     },
-    porfileimg:{
-        type:String,
-        required: ture
+    username: {
+        type: String,
+        required: true
     },
-    comment:{
+    profileImg: {
+        type: String,
+        required: true
+    },
+    likes: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+        default: []
+    },
+    comments: {
+        type: [{
+            comment: String,
+            user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+            name: String,
+            username: String,
+            profileImg: String,
+            createdAt: { type: Date, default: Date.now() },
+        }],
+        default: []
+    }
+}, { timestamps: true });
 
-        type:[{
-            comment:String,
-            User:{
-                type:mongoose.Schema.type.objectid,
-                ref: "User",
-            },
-            name:{
-            type:String,
-         },
-         username:{
-            type:String,
-         },
-         porfileimg:{
-            type:String,
-         },
-         createdAt :{
-             type:Date,
-             default: Date.now()
-         }
-
-        }]
-
-    },
-    
-},{ timestamps: true })
-const POST = mongoose.models.Post || mongoose.model("User", PostSchema);
+const POST = mongoose.models.Post || mongoose.model('Post', POSTSchema);
 
 export default POST;
