@@ -24,7 +24,7 @@ export async function Post (req){
         });
         await newpost.save()
         return new Response (json.stringify(),
-        {status:200}
+        {status:201}
     )
     } catch (error) {
         console.log (error)
