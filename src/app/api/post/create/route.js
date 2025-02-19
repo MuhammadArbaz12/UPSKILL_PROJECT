@@ -4,7 +4,7 @@ import {currentUser} from "@clerk/nextjs/server"
 
 
 
-export async function POST (req){
+export async function Post (req){
     const user = await currentUser(req)
     try {
         await Connect ()
