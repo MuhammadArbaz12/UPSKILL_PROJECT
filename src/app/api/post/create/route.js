@@ -33,3 +33,26 @@ export async function Post(req) {
             {status:500}
     }
 }
+
+
+
+
+
+// import POST from "../../../../lib/models/post.model";
+// import { connect } from "../../../../lib/mongodb/mongoose";
+// import { currentUser } from "@clerk/nextjs/dist/types/server";
+
+// export async function Post(req) {
+//     const user = currentUser(req)
+//     try {
+//         await connect()
+//         const data = await req.json()
+//         if (!user || user.publicMetadata.userMongoId !== data.userMongoId) {
+//             return new Response ("unauthorize",{
+//                 status:401
+//             })
+//         }
+//     } catch (error) {
+        
+//     }
+// }
