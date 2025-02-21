@@ -22,15 +22,15 @@ export async function Post(req) {
         })
 
         await newPost.save()
-        return new Response (json.stringify(newPost),
-        {status:200}
+        return new Response (json.stringify(newPost)
+        
     )
       
 
     } catch (error) {
             console.log(error)
-            return new Response ("Internal Server error"), 
-            {status:500}
+            return new Response ("Internal Server error")
+            
     }
 }
 
