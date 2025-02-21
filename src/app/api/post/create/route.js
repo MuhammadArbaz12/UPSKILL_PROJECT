@@ -37,11 +37,11 @@
 
 
 
-import POST from "../../../../lib/models/post.model";
+import Post from "../../../../lib/models/post.model";
 import { Connect } from "../../../../lib/mongodb/mongoose.js";
 import { currentUser } from "@clerk/nextjs/server";
 
-export async function Post(req) {
+export async function POST(req) {
     const user = await currentUser(req);
     try {
         await Connect();
@@ -51,7 +51,7 @@ export async function Post(req) {
             return new Response("Unauthorized", { status: 401 });
         }
 
-        const newPost = await POST.create({
+        const newPost = await Post.create({
             user: data.userMongoId,
             name: data.name,
             username: data.username,
