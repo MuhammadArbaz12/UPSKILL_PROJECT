@@ -8,7 +8,7 @@ export const Connect = async()=>{
     }
     try{
         await mongoose.Connect(process.env.MONGODB_URL,{
-            dbName:"upskill",
+            dbName:"UPSKILL_PROJECT",
             useNewUrlParser:true,
             useUnifiedTopology:true,
       
