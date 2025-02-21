@@ -31,7 +31,7 @@ export default function Input() {
         name: user.fullName,
         username: user.username,
         text: input, 
-        porfileimg: user.imageUrl,
+        profileImg: user.imageUrl,
         image: selectedImage, 
       }),
     });
