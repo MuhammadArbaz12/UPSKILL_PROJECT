@@ -7,7 +7,7 @@ export const Connect = async()=>{
        console.log("Already connected to MongoDB")
     }
     try{
-        await mongoose.connect(process.env.MONGODB_URL,{
+        await mongoose.Connect(process.env.MONGODB_URL,{
             dbName:"upskill",
             useNewUrlParser:true,
             useUnifiedTopology:true,
