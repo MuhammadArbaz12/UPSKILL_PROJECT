@@ -19,28 +19,52 @@ export default function Input() {
       setSelectedImage(result.info.secure_url);
     }
   };
-  const handleSubmit =async () =>{
-    setPostLoading(true);
+  // const handleSubmit =async () =>{
+  //   setPostLoading(true);
+  //   const response = await fetch("/api/post/create",{
+  //     method:"POST",
+  //     headers:{
+  //       "Content-Type":"application/json"
+  
+  //     },
+  //     body: JSON.stringify({
+  //       userMongoId: user.publicMetadata.userMongoId,
+  //       name: user.fullName,
+  //       username: user.username,
+  //       text: input, 
+  //       profileImg: user.imageUrl,
+  //       image: selectedImage, 
+  //     }),
+  //   });
+  //   setPostLoading(false);
+  //   setInput("");
+  //   setSelectedImage(null);
+  // }
+  const handleSubmit = async () => {
+    setPostLoading(true)
     const response = await fetch("/api/post/create",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
   
       },
-      body: JSON.stringify({
-        userMongoId: user.publicMetadata.userMongoId,
-        name: user.fullName,
-        username: user.username,
-        text: input, 
-        profileImg: user.imageUrl,
-        image: selectedImage, 
-      }),
-    });
-    setPostLoading(false);
-    setInput("");
-    setSelectedImage(null);
+        body: JSON.stringify({
+              userMongoId:user.publicMetadata.userMongoId,
+          name: user.fullName,
+          username: user.username,
+          text: input,
+          profileImg: user.imageUrl,
+          image: selectedImage,
+  
+              }),
+  
+    })
+    setPostLoading(false)
+    setSelectedImage(null)
+    setInput("")
+  
+  
   }
-
   return (
     <div className="flex flex-col m-auto p-4 border rounded-lg shadow-lg bg-white w-full max-w-md space-y-4">
       <textarea
