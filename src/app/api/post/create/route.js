@@ -37,11 +37,11 @@
 
 
 
-import Post from "../../../../lib/models/post.model";
+import POST from "../../../../lib/models/post.model";
 import { Connect } from "../../../../lib/mongodb/mongoose.js";
 import { currentUser } from "@clerk/nextjs/server";
 
-export async function POST(req) {
+export async function Post(req) {
     const user = await currentUser(req);
     try {
         await Connect();
@@ -51,7 +51,7 @@ export async function POST(req) {
             return new Response("Unauthorized", { status: 504 });
         }
 
-        const newPost = await Post.create({
+        const newPost = await POST.create({
             user: data.userMongoId,
             name: data.name,
             username: data.username,
@@ -64,8 +64,8 @@ export async function POST(req) {
 
         return new Response(JSON.stringify(newPost), { status: 200 });
     } catch (error) {
-        console.error("Error creating post:", error);
-        return new Response(JSON.stringify({ error: error.message }));
+        console.error("Error creating post:", error.message);
+        return new Response(error.message);
     }
 
 }
