@@ -44,7 +44,7 @@ import { currentUser } from "@clerk/nextjs/server";
 export  async function POST(req) {
         const user = await currentUser(req);
         try {
-            await connect();
+            await Connect();
             const data = await req.json();
     console.log("Received Data:", data); 
             if (!user || user.publicMetadata.userMongoId !== data.userMongoId) {
