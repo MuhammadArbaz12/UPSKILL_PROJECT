@@ -10,7 +10,7 @@ const POSTSchema = new mongoose.Schema({
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'user',
        
     },
     name: {
@@ -26,13 +26,13 @@ const POSTSchema = new mongoose.Schema({
         required: true
     },
     likes: {
-        type: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
         default: []
     },
     comments: {
         type: [{
             comment: String,
-            user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+            user: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
             name: String,
             username: String,
             profileImg: String,
