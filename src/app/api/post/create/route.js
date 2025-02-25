@@ -43,11 +43,11 @@ import { currentUser } from "@clerk/nextjs/server";
 
 export async function POST(req) {
     const user = await currentUser(req);
-  
+    console.log("Received Data====>:", data);
     try {
         await Connect();
         const data = await req.json();
-        console.log("Received Data====>:", data);
+       
         if (!user || user.publicMetadata.userMongoId !== data.userMongoId) {
             return new Response("Unauthorized", { status: 504 });
         }
