@@ -19,7 +19,7 @@ export default function Input() {
       setSelectedImage(result.info.secure_url);
     }
   };
-  const handleSubmit = () =>{
+  const handleSubmit =async () =>{
     setPostLoading(true);
     const response = fetch("/api/post/create",{
       method:"POST",
