@@ -21,10 +21,10 @@ export default function Input() {
   };
   const handleSubmit = () =>{
     setPostLoading(true);
-    const response = fetch(`/api/post/create`,{
+    const response = fetch("/api/post/create",{
       method:"POST",
       headers:{
-        'content-type':'application/json'
+        "content-type":"application/json"
       },
       body: JSON.stringify({
         userMongoId: user.publicMetadata.userMongoId,
