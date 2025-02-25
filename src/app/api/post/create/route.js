@@ -47,10 +47,10 @@ export async function POST(req) {
     try {
         await Connect();
         const data = await req.json();
-        // console.log("Received Data:", data);
-        // if (!user || user.publicMetadata.userMongoId !== data.userMongoId) {
-        //     return new Response("Unauthorized", { status: 504 });
-        // }
+        console.log("Received Data====>:", data);
+        if (!user || user.publicMetadata.userMongoId !== data.userMongoId) {
+            return new Response("Unauthorized", { status: 504 });
+        }
 
         const newPost = await Post.create({
             user: data.userMongoId,
