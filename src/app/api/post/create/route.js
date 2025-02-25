@@ -43,6 +43,7 @@ import { currentUser } from "@clerk/nextjs/server";
 
 export async function POST(req) {
     const user = await currentUser(req);
+    console.log("user=======>" + user)
     try {
         await Connect();
         const data = await req.json();
