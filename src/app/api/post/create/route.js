@@ -65,7 +65,7 @@ export  async function POST(req) {
             return new Response(JSON.stringify(newPost), { status: 200 });
         }catch (error) {
         console.error("Error creating post:", error);
-        return new Response(JSON.stringify({ message: "Internal Server Error", error: error.message }), { status: 500 });
+        return new Response(JSON.stringify({ error: error.message }));
     }
     
     }
