@@ -131,7 +131,7 @@
 
 
 
-"use client";
+"use client"
 import React, { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { CldUploadWidget } from "next-cloudinary";
@@ -140,55 +140,42 @@ export default function Input() {
   const { user, isSignedIn, isLoaded } = useUser();
   const [input, setInput] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
-  const [postLoading, setPostLoading] = useState(false);
+    const [postLoading, setPostLoading] = useState(false);
 
   if (!user || !isSignedIn || !isLoaded) {
     return null;
   }
+console.log("=====> data" ,user.publicMetadata.userMongoId)
+const handleImageUpload =(result) =>{
+  if(result.event = "success"){
+    setSelectedImage(result.info.secure_url)
+  }
+}
+const handleSubmit = async () => {
+  setPostLoading(true)
+  const response = await fetch("/api/post/create",{
+    method:"POST",
+    headers:{
+      "Content-Type":"application/json"
 
-  console.log("=====> data", user.publicMetadata.userMongoId);
+    },
+      body: JSON.stringify({
+            userMongoId:user.publicMetadata.userMongoId,
+        name: user.fullName,
+        username: user.username,
+        text: input,
+        profileImg: user.imageUrl,
+        image: selectedImage,
 
-  const handleImageUpload = (result) => {
-    if (result.event === "success") { // Fixed comparison here
-      setSelectedImage(result.info.secure_url);
-    }
-  };
+            }),
 
-  const handleSubmit = async () => {
-    setPostLoading(true);
-    try {
-      const response = await fetch("/api/post/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userMongoId: user.publicMetadata.userMongoId,
-          name: user.fullName,
-          username: user.username,
-          text: input,
-          profileImg: user.imageUrl,
-          image: selectedImage,
-        }),
-      });
+  })
+  setPostLoading(false)
+  setSelectedImage(null)
+  setInput("")
 
-      if (!response.ok) {
-        throw new Error("Failed to create post");
-      }
 
-      const result = await response.json();
-      console.log("Post created successfully:", result);
-
-      // Reset the form after successful submission
-      setSelectedImage(null);
-      setInput("");
-    } catch (error) {
-      console.error("Error submitting post:", error);
-    } finally {
-      setPostLoading(false);
-    }
-  };
-
+}
   return (
     <div className="flex flex-col p-4 border rounded-lg shadow-lg bg-white w-full max-w-md space-y-4">
       <textarea
@@ -210,7 +197,7 @@ export default function Input() {
       )}
 
       <div className="flex items-center justify-between">
-        <CldUploadWidget uploadPreset="CLASS_NEW" onUpload={handleImageUpload}>
+        <CldUploadWidget uploadPreset="CLASS_NEW" onUpload={handleImageUpload} >
           {({ open }) => (
             <button
               type="button"
@@ -223,10 +210,11 @@ export default function Input() {
         </CldUploadWidget>
 
         <button
-          onClick={handleSubmit}
+     onClick={handleSubmit}
           className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
         >
-          {postLoading ? "Posting..." : "Post"}
+
+          Post
         </button>
       </div>
     </div>
