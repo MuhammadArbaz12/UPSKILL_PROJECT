@@ -9,8 +9,7 @@ export const Connect = async()=>{
     try{
         await mongoose.Connect(process.env.MONGODB_URL,{
             dbName:"UPSKILL_PROJECT",
-            useNewUrlParser:true,
-            useUnifiedTopology:true,
+           
       
         })
         console.log("Connected to MongoDB")
