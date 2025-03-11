@@ -116,13 +116,13 @@
 //           )}
 //         </CldUploadWidget>
 
-//         <button
-//           onClick={handleSubmit}
-//           disabled={input.trim() === "" || postLoading}
-//           className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
-//         >
-//           {postLoading ? "Posting..." : "Post"}
-//         </button>
+        // <button
+        //   onClick={handleSubmit}
+        //   disabled={input.trim() === "" || postLoading}
+        //   className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+        // >
+        //   {postLoading ? "Posting..." : "Post"}
+        // </button>
 //       </div>
 //     </div>
 //   );
@@ -210,11 +210,11 @@ const handleSubmit = async () => {
         </CldUploadWidget>
 
         <button
-     onClick={handleSubmit}
+          onClick={handleSubmit}
+          disabled={input.trim() === "" || postLoading}
           className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
         >
-
-          Post
+          {postLoading ? "Posting..." : "Post"}
         </button>
       </div>
     </div>
