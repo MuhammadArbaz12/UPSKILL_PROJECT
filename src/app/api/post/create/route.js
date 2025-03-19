@@ -64,7 +64,7 @@ console.log("Received Data:", data);
 
         return new Response(JSON.stringify(newPost), { status: 200 });
 
-console.log("Post Create Success")
+console.log("Post Create Successf")
     }catch (error) {
     console.error("Error creating post:", error);
     return new Response(JSON.stringify({ message: "Internal Server Error", error: error.message }), { status: 500 });
