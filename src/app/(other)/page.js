@@ -13,7 +13,7 @@ export default async function  page() {
 
   let data = null
   try {
-    const result = await fetch ("https://upskill-project-vrej.vercel.app/api/post/all",{
+    const result = await fetch (`${process.env.URL}api/post/all`,{
       method: "POST",
       cache: "no-store",
     })
