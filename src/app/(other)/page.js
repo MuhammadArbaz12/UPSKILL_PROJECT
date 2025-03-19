@@ -26,7 +26,7 @@ export default async function page() {
         <h2 className="text-lg sm:text-xl font-bold">Home</h2>
         <Input />
         <div>
-          {data.map((item) => (
+          {data?.map((item) => (
             <>
               <div className="main-post">
                 <div className="profile-info-main">
