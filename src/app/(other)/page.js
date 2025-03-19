@@ -10,15 +10,15 @@ export default async function page() {
     "https://thumbs.dreamstime.com/b/beautiful-new-home-exterior-clear-evening-provides-setting-luxurious-34711767.jpg";
 
   let data = null;
-  // try {
-  //   const result = await fetch(`api/post/all`, {
-  //     method: "POST",
-  //     cache: "no-store",
-  //   });
-  //   data = await result.json();
-  // } catch (error) {
-  //   console.log(error);
-  // }
+  try {
+    const result = await fetch(`https://upskill-project-vrej.vercel.app/api/post/all`, {
+      method: "POST",
+      cache: "no-store",
+    });
+    data = await result.json();
+  } catch (error) {
+    console.log(error);
+  }
   console.log(data);
   return (
     <div className="min-h-screen max-w-xl mx-auto border-r border-l ">
