@@ -4,6 +4,7 @@ import "../../components/post.css";
 import { AiFillLike } from "react-icons/ai";
 import { FaComments } from "react-icons/fa";
 import { FaShareFromSquare } from "react-icons/fa6";
+import { Feed } from "../../components/Feed";
 
 export default async function page() {
   const HomeImg =
@@ -19,13 +20,13 @@ export default async function page() {
   } catch (error) {
     console.log(error);
   }
-  console.log(data);
+ 
   return (
     <div className="min-h-screen max-w-xl mx-auto border-r border-l ">
       <div className="py-2 px-3 sticky top-0 z-50 bg-white border-b border-gray-200 ">
         <h2 className="text-lg sm:text-xl font-bold">Home</h2>
         <Input />
-        <div>
+        {/* <div>
           {data?.map((item) => (
             <>
               <div className="main-post">
@@ -75,7 +76,8 @@ export default async function page() {
               </div>
             </>
           ))}
-        </div>
+        </div> */}
+        <Feed data={data} />
       </div>
     </div>
   );
